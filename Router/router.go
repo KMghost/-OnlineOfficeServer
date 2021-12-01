@@ -1,9 +1,9 @@
 package Router
 
 import (
-	"OnlineOfficeServer/Controllers"
 	"OnlineOfficeServer/Middlewares"
 	"OnlineOfficeServer/Sessions"
+	"OnlineOfficeServer/Utils/VerficationCode"
 	"github.com/gin-contrib/sessions"
 	"github.com/gin-gonic/gin"
 )
@@ -14,10 +14,11 @@ func InitRouter() {
 	router.Use(Middlewares.Cors())
 	// 使用 session(cookie-based)
 	router.Use(sessions.Sessions("myyyyyyysession", Sessions.Store))
-	v1 := router.Group("v1")
+	api := router.Group("api")
 	{
-		v1.POST("/testinsert", Controllers.TestInsert)
+		// api.POST("/testinsert", Controllers.TestInsert)
+		api.GET("/captcha", VerficationCode.GetImg)
 	}
 
-	router.Run(":8080")
+	router.Run(":8081")
 }
