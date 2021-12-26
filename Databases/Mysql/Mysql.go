@@ -1,6 +1,7 @@
 package Mysql
 
 import (
+	"database/sql"
 	"fmt"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
@@ -8,6 +9,7 @@ import (
 )
 
 var DB *gorm.DB
+var SqlDB *sql.DB
 
 func init() {
 	var err error
@@ -19,15 +21,15 @@ func init() {
 		SkipInitializeWithVersion: false, // 根据当前 MySQL 版本自动配置
 	}), &gorm.Config{})
 
-	sqlDB, _ := DB.DB()
+	SqlDB, _ = DB.DB()
 	// SetMaxIdleConns 设置空闲连接池中连接的最大数量
-	sqlDB.SetMaxIdleConns(10)
+	SqlDB.SetMaxIdleConns(10)
 
 	// SetMaxOpenConns 设置打开数据库连接的最大数量。
-	sqlDB.SetMaxOpenConns(100)
+	SqlDB.SetMaxOpenConns(100)
 
 	// SetConnMaxLifetime 设置了连接可复用的最大时间。
-	sqlDB.SetConnMaxLifetime(time.Hour)
+	SqlDB.SetConnMaxLifetime(time.Hour)
 
 	if err != nil {
 		fmt.Printf("mysql connect error %v", err)
