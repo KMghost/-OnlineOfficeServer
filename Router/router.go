@@ -15,13 +15,20 @@ func InitRouter() {
 	// router.Use(sessions.Sessions("myyyyyyysession", Sessions.Store))
 	api := router.Group("api")
 	{
-		// api.POST("/testinsert", Controllers.TestInsert)
+		// 获取验证码
 		api.GET("/captcha", VerficationCode.GetImg)
+		// 获取菜单列表
 		api.GET("/system/config/menu", Controllers.MenuSelect)
+		// 登录
 		api.POST("/login", Controllers.Login)
+		api.POST("/logout", Controllers.Logout)
+		// 用户权限
 		api.GET("/admin/info", Controllers.AdminInfo)
+		// 职位管理
 		api.GET("/system/basic/pos", Controllers.PositionSelect)
 		api.POST("/system/basic/pos", Controllers.PositionInsert)
+		// 职称管理
+		api.GET("/system/basic/joblevel", Controllers.JobLevelSelect)
 	}
 
 	router.Run(":8081")

@@ -1,5 +1,6 @@
 package Models
 
+// 菜单列表
 type Menu struct {
 	Id          int    `json:"id"`
 	Url         string `json:"url"`

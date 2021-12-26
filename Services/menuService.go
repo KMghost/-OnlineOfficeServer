@@ -20,6 +20,7 @@ type Menu struct {
 	Children    []interface{} `json:"children"`
 }
 
+// 菜单列表
 func (this *Menu) Select() []Menu {
 	var menu []Models.Menu
 	Mysql.DB.Order("pid").Find(&menu)

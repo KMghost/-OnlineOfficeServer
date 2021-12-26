@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+// 获取菜单列表
 func MenuSelect(c *gin.Context) {
 	var menuService Services.Menu
 	result := menuService.Select()
