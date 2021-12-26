@@ -12,7 +12,7 @@ type Position struct {
 	Id         int     `json:"id"`
 	Name       string  `json:"name" `
 	CreateDate *MyTime `gorm:"<-:false" json:"createDate"`
-	Enabled    bool    `json:"enabled" `
+	Enabled    bool    `gorm:"default:true" json:"enabled"`
 }
 
 func (Position) TableName() string { return "t_position" }
@@ -25,7 +25,6 @@ func (this Position) Select() []Position {
 
 func (this Position) Insert(name string) error {
 	this.Name = name
-	this.Enabled = true
 	result := Mysql.DB.Omit("ID").Debug().Create(&this)
 	return result.Error
 }
