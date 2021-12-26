@@ -20,6 +20,8 @@ func InitRouter() {
 		api.GET("/system/config/menu", Controllers.MenuSelect)
 		api.POST("/login", Controllers.Login)
 		api.GET("/admin/info", Controllers.AdminInfo)
+		api.GET("/system/basic/pos", Controllers.PositionSelect)
+		api.POST("/system/basic/pos", Controllers.PositionInsert)
 	}
 
 	router.Run(":8081")

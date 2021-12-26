@@ -20,10 +20,6 @@ type Menu struct {
 func (Menu) TableName() string { return "t_menu" }
 
 func (this Menu) Select() (result []Menu) {
-	p := new([]Menu)
-
-	Mysql.DB.Order("pid").Find(&p)
-	result = *p
-
+	Mysql.DB.Order("pid").Find(&result)
 	return
 }
