@@ -1,19 +1,20 @@
 package Services
 
 import (
+	"OnlineOfficeServer/Databases/Mysql"
 	"OnlineOfficeServer/Models"
 )
 
 type Position Models.Position
 
 func (this Position) Select() (result []Models.Position) {
-	var position Models.Position
-	result = position.Select()
+	Mysql.DB.Order("id").Find(&result)
 	return
 }
 
 func (this Position) Insert(name string) error {
 	var position Models.Position
-	err := position.Insert(name)
-	return err
+	position.Name = name
+	result := Mysql.DB.Omit("ID").Debug().Create(&position)
+	return result.Error
 }

@@ -1,9 +1,5 @@
 package Models
 
-import (
-	"OnlineOfficeServer/Databases/Mysql"
-)
-
 type Menu struct {
 	Id          int    `json:"id"`
 	Url         string `json:"url"`
@@ -18,8 +14,3 @@ type Menu struct {
 }
 
 func (Menu) TableName() string { return "t_menu" }
-
-func (this Menu) Select() (result []Menu) {
-	Mysql.DB.Order("pid").Find(&result)
-	return
-}

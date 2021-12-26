@@ -1,7 +1,6 @@
 package Models
 
 import (
-	"OnlineOfficeServer/Databases/Mysql"
 	"database/sql/driver"
 	"errors"
 	"fmt"
@@ -17,17 +16,7 @@ type Position struct {
 
 func (Position) TableName() string { return "t_position" }
 
-func (this Position) Select() []Position {
-	var result []Position
-	Mysql.DB.Order("id").Find(&result)
-	return result
-}
-
-func (this Position) Insert(name string) error {
-	this.Name = name
-	result := Mysql.DB.Omit("ID").Debug().Create(&this)
-	return result.Error
-}
+// ========================================================================
 
 type MyTime time.Time
 

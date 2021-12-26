@@ -1,6 +1,7 @@
 package Services
 
 import (
+	"OnlineOfficeServer/Databases/Mysql"
 	"OnlineOfficeServer/Models"
 )
 
@@ -20,11 +21,11 @@ type Menu struct {
 }
 
 func (this *Menu) Select() []Menu {
-	var menu Models.Menu
-	records := menu.Select()
+	var menu []Models.Menu
+	Mysql.DB.Order("pid").Find(&menu)
 	var result []Menu
 	var a Menu
-	for _, data := range records {
+	for _, data := range menu {
 		a.Id = data.Id
 		a.Url = data.Url
 		a.Path = data.Path
